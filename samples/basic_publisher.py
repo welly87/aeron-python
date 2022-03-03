@@ -9,7 +9,7 @@ from aeronpy import Context, BACK_PRESSURED, NOT_CONNECTED, ADMIN_ACTION, PUBLIC
 def main():
     try:
         parser = ArgumentParser()
-        parser.add_argument('-p', '--prefix', default=None)
+        parser.add_argument('-p', '--prefix', default="aeron-dir")
         parser.add_argument('-c', '--channel', default='aeron:udp?endpoint=localhost:40123')
         parser.add_argument('-s', '--stream_id', type=int, default=1)
         parser.add_argument('-m', '--messages', type=int, default=sys.maxsize)

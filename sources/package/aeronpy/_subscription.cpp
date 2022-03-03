@@ -83,13 +83,15 @@ int subscription::poll(py::function handler, int fragment_limit)
 
 int subscription::poll_eos(py::object handler)
 {
-    return aeron_subscription_->pollEndOfStreams([&](auto& image)
-    {
-        py::gil_scoped_acquire gil_guard;
-
-        if (handler)
-            handler(image);
-    });
+    return 0;
+//    throw std::exception("not implemented due to deprecated in aeron core");
+//    return aeron_subscription_->pollEndOfStreams([&](auto& image)
+//    {
+//        py::gil_scoped_acquire gil_guard;
+//
+//        if (handler)
+//            handler(image);
+//    });
 }
 
 bool subscription::__bool__() const

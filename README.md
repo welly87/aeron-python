@@ -37,7 +37,8 @@ To build, following prerequisites are necessary:
 
 * Clone this repository into a local directory:
     ```
-    $ git clone 
+    $ git clone ... 
+    $ git submodule update --init --recursive
     ```
 
 * Create a build directory.
@@ -71,6 +72,9 @@ It is possible to build and install this repository as a source package using se
 Clone this repository into a local directory:
 ```
 $ git clone ...
+$ git submodule update --init --recursive
+$ cd external/aeron && git checkout 1.37.0
+$ cd aeron-python
 ```
 
 Run pip against newly cloned repository

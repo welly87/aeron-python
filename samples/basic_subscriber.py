@@ -8,7 +8,7 @@ from aeronpy import Context
 def main():
     try:
         parser = ArgumentParser()
-        parser.add_argument('-p', '--prefix', default=None)
+        parser.add_argument('-p', '--prefix', default="aeron-dir")
         parser.add_argument('-c', '--channel', default='aeron:udp?endpoint=localhost:40123')
         parser.add_argument('-s', '--stream_id', type=int, default=1)
 
@@ -20,8 +20,15 @@ def main():
             unavailable_image_handler=lambda *args: print(f'unavailable image {args}'))
 
         subscription = context.add_subscription(args.channel, args.stream_id)
+
+        def handle_message(data, header):
+            memory = memoryview(data)
+            print(bytes(memory))
+
+
+
         while True:
-            fragments_read = subscription.poll(lambda data: print(bytes(data)))
+            fragments_read = subscription.poll(handle_message)
             if fragments_read == 0:
                 eos_count = subscription.poll_eos(lambda *args: print(f'end of stream: {args}'))
                 if eos_count > 0:
